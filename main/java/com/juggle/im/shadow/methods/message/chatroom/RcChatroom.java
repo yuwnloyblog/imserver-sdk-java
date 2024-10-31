@@ -20,8 +20,12 @@ public class RcChatroom {
         msg.setMsgContent(message.getContent().toString());
         msg.setPushContent(message.getPushContent());
         msg.setPushExt(message.getPushExt());
-        msg.setIsStorage(message.getIsPersisted()>0);
-        msg.setIsNotifySender(message.getIsIncludeSender()>0);
+        if(message.getIsPersisted()!=null){
+            msg.setIsStorage(message.getIsPersisted()>0);
+        }
+        if(message.getIsIncludeSender()!=null){
+            msg.setIsNotifySender(message.getIsIncludeSender()>0);
+        }
         ResponseResult result = this.juggleim.msgSender.sendChatroomMsg(msg);
         io.rong.models.response.ResponseResult rcResult;
         if(result!=null){
