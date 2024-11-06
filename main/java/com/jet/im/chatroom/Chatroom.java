@@ -82,9 +82,9 @@ public class Chatroom {
     }
 
     public ChrmMembersExistResult memberExists(ChrmMemberIds members)throws Exception{
-        String urlPath = this.juggleim.getApiUrl()+"/apigateway/chatrooms/members/exist";
+        String urlPath = this.jetim.getApiUrl()+"/apigateway/chatrooms/members/exist";
         String body = GsonUtil.toJson(members);
-        HttpURLConnection conn = HttpUtil.CreatePostHttpConnection(this.juggleim.getAppkey(), this.juggleim.getSecret(), urlPath);
+        HttpURLConnection conn = HttpUtil.CreatePostHttpConnection(this.jetim.getAppkey(), this.jetim.getSecret(), urlPath);
         HttpUtil.setBodyParameter(body, conn);
         String response = "";
         ChrmMembersExistResult result = null;

@@ -1,4 +1,4 @@
-package com.juggle.im.models.chatroom;
+package com.jet.im.models.chatroom;
 
 import java.util.List;
 import com.google.gson.annotations.SerializedName;
