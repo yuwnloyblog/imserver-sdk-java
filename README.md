@@ -7,7 +7,7 @@ The Java SDK for JIM API
 
 package com.jet.im;
 
-import com.jet.im.shadow.RcJuggleIm;
+import com.jet.im.shadow.RcJetIm;
 
 import io.rong.models.response.TokenResult;
 import io.rong.models.user.UserModel;
