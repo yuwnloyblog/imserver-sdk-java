@@ -6,7 +6,7 @@ import com.jet.im.shadow.methods.message.RcMessage;
 import com.jet.im.shadow.methods.user.RcUser;
 
 public class RcJetIm {
-    public JetIm jteim;
+    public JetIm jetim;
 
     public RcUser user;
     public RcChatroom chatroom;

@@ -35,7 +35,7 @@ public class RcTag {
         List<UserTag> list = new ArrayList<>();
         list.add(tag);
         uTags.setUserTags(list);
-        ResponseResult result = this.jetim.user.tagUser.add(uTags);
+        ResponseResult result = this.jet.user.tagUser.add(uTags);
         io.rong.models.response.ResponseResult rcResult;
         if(result!=null){
             rcResult = new io.rong.models.response.ResponseResult(result.getCode(), result.getErrorMessage());
@@ -59,7 +59,7 @@ public class RcTag {
         }
         UserTags uTags = new UserTags();
         uTags.setUserTags(list);
-        ResponseResult result = this.jetim.user.tagUser.add(uTags);
+        ResponseResult result = this.jet.user.tagUser.add(uTags);
         io.rong.models.response.ResponseResult rcResult;
         if(result!=null){
             rcResult = new io.rong.models.response.ResponseResult(result.getCode(), result.getErrorMessage());
@@ -70,7 +70,7 @@ public class RcTag {
     }
 
     public GetTagResult get(GetTagModel getTag)throws Exception{
-        UserTagsResult result = this.jetim.user.tagUser.qryUserTags(getTag.getUserIds());
+        UserTagsResult result = this.jet.user.tagUser.qryUserTags(getTag.getUserIds());
         GetTagResult rcResult;
         if(result!=null){
             if(result.getUserTags()!=null){
