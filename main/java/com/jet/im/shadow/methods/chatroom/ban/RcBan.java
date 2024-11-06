@@ -1,22 +1,22 @@
-package com.juggle.im.shadow.methods.chatroom.ban;
+package com.jet.im.shadow.methods.chatroom.ban;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.juggle.im.JuggleIm;
-import com.juggle.im.models.ResponseResult;
-import com.juggle.im.models.chatroom.ChatroomMember;
-import com.juggle.im.models.chatroom.ChrmGlobalMuteMemberIds;
-import com.juggle.im.models.chatroom.ChrmGlobalMuteMembersResult;
-import com.juggle.im.shadow.util.DateUtil;
+import com.jet.im.JetIm;
+import com.jet.im.models.ResponseResult;
+import com.jet.im.models.chatroom.ChatroomMember;
+import com.jet.im.models.chatroom.ChrmGlobalMuteMemberIds;
+import com.jet.im.models.chatroom.ChrmGlobalMuteMembersResult;
+import com.jet.im.shadow.util.DateUtil;
 
 import io.rong.models.chatroom.ChatroomModel;
 
 public class RcBan {
-    private JuggleIm juggleim;
+    private JetIm jetim;
 
-    public RcBan(JuggleIm juggleim){
-        this.juggleim = juggleim;
+    public RcBan(JetIm jetim){
+        this.jetim = jetim;
     }
 
     public io.rong.models.response.ResponseResult add(ChatroomModel chatroom)throws Exception{
@@ -29,7 +29,7 @@ public class RcBan {
             endOffset = ((long)chatroom.getMinute().intValue())*60*1000;
         }
         ChrmGlobalMuteMemberIds muteIds = new ChrmGlobalMuteMemberIds(ids,0,endOffset);
-        ResponseResult result = this.juggleim.chatroom.chrmGlobalMute.add(muteIds);
+        ResponseResult result = this.jetim.chatroom.chrmGlobalMute.add(muteIds);
         io.rong.models.response.ResponseResult rcResult;
         if(result!=null){
             rcResult = new io.rong.models.response.ResponseResult(result.getCode(), result.getErrorMessage());
@@ -45,7 +45,7 @@ public class RcBan {
             ids.add(m.id);
         }
         ChrmGlobalMuteMemberIds muteIds = new ChrmGlobalMuteMemberIds(ids,0,0);
-        ResponseResult result = this.juggleim.chatroom.chrmGlobalMute.remove(muteIds);
+        ResponseResult result = this.jetim.chatroom.chrmGlobalMute.remove(muteIds);
         io.rong.models.response.ResponseResult rcResult;
         if(result!=null){
             rcResult = new io.rong.models.response.ResponseResult(result.getCode(), result.getErrorMessage());
@@ -56,7 +56,7 @@ public class RcBan {
     }
 
     public io.rong.models.response.ListGagChatroomUserResult getList()throws Exception{
-        ChrmGlobalMuteMembersResult result = this.juggleim.chatroom.chrmGlobalMute.getList(null, null);
+        ChrmGlobalMuteMembersResult result = this.jetim.chatroom.chrmGlobalMute.getList(null, null);
         io.rong.models.response.ListGagChatroomUserResult rcResult;
         if(result!=null){
             if(result.getChatroomMuteMembers()!=null){

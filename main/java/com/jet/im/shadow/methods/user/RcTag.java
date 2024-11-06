@@ -1,15 +1,15 @@
-package com.juggle.im.shadow.methods.user;
+package com.jet.im.shadow.methods.user;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.juggle.im.JuggleIm;
-import com.juggle.im.models.ResponseResult;
-import com.juggle.im.models.user.UserTag;
-import com.juggle.im.models.user.UserTags;
-import com.juggle.im.models.user.UserTagsResult;
+import com.jet.im.JetIm;
+import com.jet.im.models.ResponseResult;
+import com.jet.im.models.user.UserTag;
+import com.jet.im.models.user.UserTags;
+import com.jet.im.models.user.UserTagsResult;
 
 import io.rong.models.response.GetTagResult;
 import io.rong.models.user.BatchTagModel;
@@ -17,10 +17,10 @@ import io.rong.models.user.GetTagModel;
 import io.rong.models.user.TagModel;
 
 public class RcTag {
-    private JuggleIm juggleim;
+    private JetIm jet;
 
-    public RcTag(JuggleIm juggleim){
-        this.juggleim = juggleim;
+    public RcTag(JetIm jet){
+        this.jet = jet;
     }
 
     public io.rong.models.Result set(TagModel rcTag)throws Exception{
@@ -35,7 +35,7 @@ public class RcTag {
         List<UserTag> list = new ArrayList<>();
         list.add(tag);
         uTags.setUserTags(list);
-        ResponseResult result = this.juggleim.user.tagUser.add(uTags);
+        ResponseResult result = this.jetim.user.tagUser.add(uTags);
         io.rong.models.response.ResponseResult rcResult;
         if(result!=null){
             rcResult = new io.rong.models.response.ResponseResult(result.getCode(), result.getErrorMessage());
@@ -59,7 +59,7 @@ public class RcTag {
         }
         UserTags uTags = new UserTags();
         uTags.setUserTags(list);
-        ResponseResult result = this.juggleim.user.tagUser.add(uTags);
+        ResponseResult result = this.jetim.user.tagUser.add(uTags);
         io.rong.models.response.ResponseResult rcResult;
         if(result!=null){
             rcResult = new io.rong.models.response.ResponseResult(result.getCode(), result.getErrorMessage());
@@ -70,7 +70,7 @@ public class RcTag {
     }
 
     public GetTagResult get(GetTagModel getTag)throws Exception{
-        UserTagsResult result = this.juggleim.user.tagUser.qryUserTags(getTag.getUserIds());
+        UserTagsResult result = this.jetim.user.tagUser.qryUserTags(getTag.getUserIds());
         GetTagResult rcResult;
         if(result!=null){
             if(result.getUserTags()!=null){

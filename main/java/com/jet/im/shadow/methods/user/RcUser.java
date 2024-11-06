@@ -1,25 +1,25 @@
-package com.juggle.im.shadow.methods.user;
+package com.jet.im.shadow.methods.user;
 
-import com.juggle.im.JuggleIm;
-import com.juggle.im.models.user.UserInfo;
-import com.juggle.im.models.user.UserInfoResult;
-import com.juggle.im.models.user.UserToken;
-import com.juggle.im.models.user.UserTokenResult;
-import com.juggle.im.shadow.methods.chatroom.block.RcBlock;
-import com.juggle.im.shadow.util.DateUtil;
+import com.jet.im.JetIm;
+import com.jet.im.models.user.UserInfo;
+import com.jet.im.models.user.UserInfoResult;
+import com.jet.im.models.user.UserToken;
+import com.jet.im.models.user.UserTokenResult;
+import com.jet.im.shadow.methods.chatroom.block.RcBlock;
+import com.jet.im.shadow.util.DateUtil;
 
 import io.rong.models.response.TokenResult;
 import io.rong.models.response.UserResult;
 import io.rong.models.user.UserModel;
 
 public class RcUser {
-    private JuggleIm juggleim;
+    private JetIm jetim;
     public RcTag tag;
     public RcBlock block;
-    public RcUser(JuggleIm juggleim){
-        this.juggleim = juggleim;
-        this.tag = new RcTag(this.juggleim);
-        this.block = new RcBlock(this.juggleim);
+    public RcUser(JetIm jetim){
+        this.jetim = jetim;
+        this.tag = new RcTag(this.jetim);
+        this.block = new RcBlock(this.jetim);
     }
 
     public TokenResult register(UserModel rcUser)throws Exception{
@@ -27,7 +27,7 @@ public class RcUser {
         user.setUserId(rcUser.id);
         user.setNickname(rcUser.name);
         user.setUserPortrait(rcUser.portrait);
-        UserTokenResult result = this.juggleim.user.register(user);
+        UserTokenResult result = this.jetim.user.register(user);
         TokenResult rcResult = null;
         if(result!=null){
             if(result.getUserToken()==null){
@@ -41,7 +41,7 @@ public class RcUser {
     }
 
     public UserResult get(UserModel rcUser)throws Exception{
-        UserInfoResult result = this.juggleim.user.get(rcUser.id);
+        UserInfoResult result = this.jetim.user.get(rcUser.id);
         UserResult rcResult = null;
         if(result!=null){
             if(result.getUserInfo()!=null){

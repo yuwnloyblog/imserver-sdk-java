@@ -1,4 +1,4 @@
-package com.juggle.im.shadow.util;
+package com.jet.im.shadow.util;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
