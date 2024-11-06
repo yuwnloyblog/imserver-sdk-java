@@ -3,6 +3,8 @@ package com.jet.im.models.chatroom;
 import java.util.List;
 import com.google.gson.annotations.SerializedName;
 
+import com.google.gson.annotations.SerializedName;
+
 public class ChatroomBanMembers {
     @SerializedName("chat_id")
     private String chatId;
