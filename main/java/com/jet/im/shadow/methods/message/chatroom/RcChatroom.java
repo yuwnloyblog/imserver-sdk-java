@@ -36,13 +36,15 @@ public class RcChatroom {
         if(result!=null){
             rcResult = new io.rong.models.response.MessageResult(result.getCode(), result.getErrorMessage());
             List<io.rong.models.response.MessageUIDEntry> list = new ArrayList<io.rong.models.response.MessageUIDEntry>();
-            for (MsgIdEntry entry : result.getMsgIds()) {
-                io.rong.models.response.MessageUIDEntry msgUidEntity = new io.rong.models.response.MessageUIDEntry();
-                msgUidEntity.setChatroomId(entry.getTargetId());
-                msgUidEntity.setMessageUID(entry.getMsgId());
-                list.add(msgUidEntity);
+            if(result.getMsgIds()!=null&&result.getMsgIds().size()>0){
+                for (MsgIdEntry entry : result.getMsgIds()) {
+                    io.rong.models.response.MessageUIDEntry msgUidEntity = new io.rong.models.response.MessageUIDEntry();
+                    msgUidEntity.setChatroomId(entry.getTargetId());
+                    msgUidEntity.setMessageUID(entry.getMsgId());
+                    list.add(msgUidEntity);
+                }
+                rcResult.setMessageUIDs(list);
             }
-            rcResult.setMessageUIDs(list);
         }else{
             rcResult = new io.rong.models.response.MessageResult(500, "can not get data.");
         }

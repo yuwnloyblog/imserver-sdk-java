@@ -9,7 +9,7 @@ public class MessageResult extends ResponseResult{
         super(code,errorMessage);
     }
     
-    @SerializedName("msg")
+    @SerializedName("data")
     private List<MsgIdEntry> msgIds;
     
     public List<MsgIdEntry> getMsgIds(){
