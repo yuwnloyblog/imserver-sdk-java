@@ -3,6 +3,7 @@ package com.jet.im.message;
 import java.net.HttpURLConnection;
 
 import com.jet.im.JetIm;
+import com.jet.im.models.MessageResult;
 import com.jet.im.models.ResponseResult;
 import com.jet.im.models.message.ChatroomMessage;
 import com.jet.im.models.message.PrivateMessage;
@@ -16,34 +17,34 @@ public class MsgSender {
         this.jetim = jetim;
     }
 
-    public ResponseResult sendPrivateMsg(PrivateMessage message)throws Exception{
+    public MessageResult sendPrivateMsg(PrivateMessage message)throws Exception{
         String urlPath = this.jetim.getApiUrl()+ "/apigateway/messages/private/send";
         String body = GsonUtil.toJson(message);
         HttpURLConnection conn = HttpUtil.CreatePostHttpConnection(this.jetim.getAppkey(), this.jetim.getSecret(), urlPath);
         HttpUtil.setBodyParameter(body, conn);
         String response = "";
-        ResponseResult result  = null;
+        MessageResult result  = null;
         try{
             response = HttpUtil.returnResult(conn);
-            result = (ResponseResult)GsonUtil.fromJson(response, ResponseResult.class);
+            result = (MessageResult)GsonUtil.fromJson(response, MessageResult.class);
         }catch(Exception e){
-            result = new ResponseResult(500,"request:"+conn.getURL()+",response:"+response+",Exception:"+e.getMessage());
+            result = new MessageResult(500,"request:"+conn.getURL()+",response:"+response+",Exception:"+e.getMessage());
         }
         return result;
     }
 
-    public ResponseResult sendChatroomMsg(ChatroomMessage message)throws Exception{
+    public MessageResult sendChatroomMsg(ChatroomMessage message)throws Exception{
         String urlPath = this.jetim.getApiUrl()+ "/apigateway/messages/chatroom/send";
         String body = GsonUtil.toJson(message);
         HttpURLConnection conn = HttpUtil.CreatePostHttpConnection(this.jetim.getAppkey(), this.jetim.getSecret(), urlPath);
         HttpUtil.setBodyParameter(body, conn);
         String response = "";
-        ResponseResult result  = null;
+        MessageResult result  = null;
         try{
             response = HttpUtil.returnResult(conn);
-            result = (ResponseResult)GsonUtil.fromJson(response, ResponseResult.class);
+            result = (MessageResult)GsonUtil.fromJson(response, MessageResult.class);
         }catch(Exception e){
-            result = new ResponseResult(500,"request:"+conn.getURL()+",response:"+response+",Exception:"+e.getMessage());
+            result = new MessageResult(500,"request:"+conn.getURL()+",response:"+response+",Exception:"+e.getMessage());
         }
         return result;
     }

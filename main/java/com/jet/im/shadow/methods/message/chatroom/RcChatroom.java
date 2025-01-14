@@ -1,6 +1,11 @@
 package com.jet.im.shadow.methods.message.chatroom;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.jet.im.JetIm;
+import com.jet.im.models.MessageResult;
+import com.jet.im.models.MsgIdEntry;
 import com.jet.im.models.ResponseResult;
 import com.jet.im.models.message.ChatroomMessage;
 import com.jet.im.models.message.RecallMessage;
@@ -12,7 +17,7 @@ public class RcChatroom {
         this.jetim = jetim;
     }
 
-    public io.rong.models.response.ResponseResult send(io.rong.models.message.ChatroomMessage message)throws Exception{
+    public io.rong.models.response.MessageResult send(io.rong.models.message.ChatroomMessage message)throws Exception{
         ChatroomMessage msg = new ChatroomMessage();
         msg.setSenderId(message.getSenderId());
         msg.setTargetIds(message.getTargetId());
@@ -26,12 +31,20 @@ public class RcChatroom {
         if(message.getIsIncludeSender()!=null){
             msg.setIsNotifySender(message.getIsIncludeSender()>0);
         }
-        ResponseResult result = this.jetim.msgSender.sendChatroomMsg(msg);
-        io.rong.models.response.ResponseResult rcResult;
+        MessageResult result = this.jetim.msgSender.sendChatroomMsg(msg);
+        io.rong.models.response.MessageResult rcResult;
         if(result!=null){
-            rcResult = new io.rong.models.response.ResponseResult(result.getCode(), result.getErrorMessage());
+            rcResult = new io.rong.models.response.MessageResult(result.getCode(), result.getErrorMessage());
+            List<io.rong.models.response.MessageUIDEntry> list = new ArrayList<io.rong.models.response.MessageUIDEntry>();
+            for (MsgIdEntry entry : result.getMsgIds()) {
+                io.rong.models.response.MessageUIDEntry msgUidEntity = new io.rong.models.response.MessageUIDEntry();
+                msgUidEntity.setChatroomId(entry.getTargetId());
+                msgUidEntity.setMessageUID(entry.getMsgId());
+                list.add(msgUidEntity);
+            }
+            rcResult.setMessageUIDs(list);
         }else{
-            rcResult = new io.rong.models.response.ResponseResult(500, "can not get data.");
+            rcResult = new io.rong.models.response.MessageResult(500, "can not get data.");
         }
         return rcResult;
     }
